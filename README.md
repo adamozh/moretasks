@@ -1,2 +1,2 @@
 # moreTasks
-A web app to manage day-to-day tasks.
+A task manager for your day-to-day tasks.
