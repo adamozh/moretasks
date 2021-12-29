@@ -1,2 +1,2 @@
 # moreTasks
-A task manager to streamline day-to-day tasks.
+A to-do list to streamline day-to-day tasks.
