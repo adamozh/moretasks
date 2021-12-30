@@ -13,9 +13,9 @@ export const Clock = () => {
     })  
     
     return (
-        <div className='clock'>
-            <h1>{date}</h1>
-            <h1>{time}</h1>
+        <div className='text-2xl flex'>
+            <div className='mx-3'>{date}</div>
+            <div className='mx-3'>{time}</div>
         </div>
     )
 }
