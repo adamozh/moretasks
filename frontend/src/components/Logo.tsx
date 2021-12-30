@@ -1,7 +1,8 @@
+import "./Logo.scss"
 
 export const Logo = () => {
     return (
-        <div className="text-3xl">
+        <div className="logo">
             moreTasks
         </div>
     )
