@@ -1,5 +1,6 @@
 import "./Clock.scss"
 import { useState, useEffect } from 'react'
+import { Typography } from "@mui/material"
 
 export const Clock = () => {
     const [date, setDate] = useState(new Date().toLocaleDateString())
@@ -14,8 +15,8 @@ export const Clock = () => {
     
     return (
         <div className='clock'>
-            <div className='clock-date'>{date}</div>
-            <div className='clock-time'>{time}</div>
+            <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>{date}</Typography>
+            <Typography variant='h6' component='div' sx={{ flexGrow: 1, marginLeft: "1rem" }}>{time}</Typography>
         </div>
     )
 }
