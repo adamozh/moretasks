@@ -7,7 +7,7 @@ export const DateInput = () => {
     const [taskDate, setTaskDate] = useState<Date | null>(null)
 
     return (
-        <LocalizationProvider sx={{ width: '50%' }} dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 label="Date"
                 value={taskDate}
@@ -15,7 +15,7 @@ export const DateInput = () => {
                     setTaskDate(newValue)
                 }}
                 renderInput={(params) => (
-                    <TextField variant="standard" {...params} />
+                    <TextField fullWidth size="small" variant="outlined" {...params} />
                 )}
             />
         </LocalizationProvider>

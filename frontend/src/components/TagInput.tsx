@@ -3,20 +3,21 @@ import { Autocomplete, Box, Button, Chip, Container, TextField, Toolbar } from "
 export const TagInput = () => {
     return (
         <Autocomplete
-        sx={{ width: '50%' }}
+        fullWidth
+        size="small"
         multiple
         id="tags-input"
         options={["option 1", "option 2", "option 3"]}
         freeSolo
         renderTags={(value: string[], getTagProps) => {
             return value.map((option: string, index: number) => (
-                <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                <Chip size="small" variant="outlined" label={option} {...getTagProps({ index })} />
             ))
         }}
         renderInput={(params) => (
             <TextField 
             {...params}
-            variant="standard"
+            variant="outlined"
             label="Add Tag(s)"
             />
         )}
