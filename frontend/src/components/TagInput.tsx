@@ -1,8 +1,16 @@
-import { Autocomplete, Box, Button, Chip, Container, TextField, Toolbar } from "@mui/material"
+import { Autocomplete, Chip, TextField, Toolbar } from "@mui/material"
+import { ChangeEventHandler, FocusEventHandler } from "react"
 
-export const TagInput = () => {
+type TagInputProps = {
+    tags: Array<string>
+    onChange: (newTags: Array<string>) => void
+}
+
+export const TagInput = (props: TagInputProps) => {
+
     return (
         <Autocomplete
+        value={props.tags}
         fullWidth
         size="small"
         multiple

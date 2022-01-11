@@ -1,21 +1,22 @@
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from "@mui/lab"
-import { useState } from 'react';
 import { TextField } from '@mui/material';
 
-export const DateInput = () => {
-    const [taskDate, setTaskDate] = useState<Date | null>(null)
+type DateInputProps = {
+    date: Date | null
+    onChange: (newDate: Date | null) => void
+}
 
+export const DateInput = (props: DateInputProps) => {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+                value={props.date}
+                inputFormat='dd-MM-yyyy'
+                onChange={props.onChange}
                 label="Date"
-                value={taskDate}
-                onChange={(newValue) => {
-                    setTaskDate(newValue)
-                }}
                 renderInput={(params) => (
-                    <TextField fullWidth size="small" variant="outlined" {...params} />
+                    <TextField fullWidth size="small" variant="outlined" {...params}/>
                 )}
             />
         </LocalizationProvider>
