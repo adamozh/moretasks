@@ -1,11 +1,16 @@
 import { Box, Button, Grid, TextField } from "@mui/material"
-import { ChangeEvent, MouseEvent, SyntheticEvent, useRef, useState } from "react"
+import React, { ChangeEvent, MouseEvent, SyntheticEvent, useRef, useState } from "react"
+import { Tag } from "../entities/Tag"
 import { DateInput } from "./DateInput"
 import { NameInput } from "./NameInput"
 import { TagInput } from "./TagInput"
 import './TaskInputBox.scss'
 
-export const TaskInputBox = () => {
+type TaskInputBoxProps = {
+    options: Tag[]
+}
+
+export const TaskInputBox = (props: TaskInputBoxProps) => {
     const [taskName, setTaskName] = useState<string>("")
     const [taskTags, setTaskTags] = useState<Array<string>>([])
     const [taskDate, setTaskDate] = useState<Date | null>(null)
@@ -14,6 +19,7 @@ export const TaskInputBox = () => {
         setTaskName("")
         setTaskTags([])
         setTaskDate(null)
+        
     }
 
     // const handleOnFocus = () => {
@@ -36,8 +42,8 @@ export const TaskInputBox = () => {
                 </Grid>
                 <Grid item xs={12} md={5}>
                     <TagInput
-                    tags={taskTags}
-                    onChange={(newTags) => setTaskTags(newTags)}/>
+                    tags={taskTags} options={props.options}
+                    onChange={(event, value) => setTaskTags(value)}/>
                 </Grid> 
                 <Grid item xs={12} md={5}>
                     <DateInput

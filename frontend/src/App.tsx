@@ -3,39 +3,28 @@ import './App.scss';
 import { NavBar } from './components/NavBar';
 import { SideBar } from './components/SideBar';
 import { TaskView } from './components/TaskView';
-import { Task } from './entities/task';
+import { Tag } from './entities/Tag';
+import { Task } from './entities/Task';
+import { useState } from 'react'
+import { temporaryTags, temporaryTasks } from './data/TemporaryData';
 
 function App() {
 
-    const tasks: Task[] = [
-        {
-            name: "Do Tutorial 3",
-            done: false,
-            tags: ["CS2040S", "schoolwork"]
-        },
-        {
-            name: "Watch Lecture 3",
-            done: false,
-            tags: ["CS3230", "schoolwork"]
-        },
-        {
-            name: "Bring coco out for a walk",
-            done: false,
-            tags: []
-        },
-        {
-            name: "Create layout for moreTasks",
-            done: false,
-            tags: ["CVWO"]
-        }
-    ]
+    const [tasks, setTasks] = useState(temporaryTasks)
+
+    const [tags, setTags] = useState(temporaryTags)
+
+    const submitNewTask = (newTask: Task) => {
+        setTasks([...tasks, newTask])
+        setTags([...tags, ...newTask.tags])
+    }
 
     return (
         <div className="App">
             <Box sx={{ display: "flex" }}>
                 <NavBar />
-                <SideBar />
-                <TaskView />
+                <SideBar tags={tags}/>
+                <TaskView tasks={tasks} tags={tags}/>
             </Box>
         </div>
     );

@@ -1,9 +1,11 @@
 import { Autocomplete, Chip, TextField, Toolbar } from "@mui/material"
 import { ChangeEventHandler, FocusEventHandler } from "react"
+import { Tag } from "../entities/Tag"
 
 type TagInputProps = {
     tags: Array<string>
-    onChange: (newTags: Array<string>) => void
+    options: Tag[]
+    onChange: (event: React.SyntheticEvent, value: string[], reason: string) => void
 }
 
 export const TagInput = (props: TagInputProps) => {
@@ -15,13 +17,14 @@ export const TagInput = (props: TagInputProps) => {
         size="small"
         multiple
         id="tags-input"
-        options={["option 1", "option 2", "option 3"]}
+        options={props.options.map(tag => tag.name)}
         freeSolo
         renderTags={(value: string[], getTagProps) => {
             return value.map((option: string, index: number) => (
                 <Chip size="small" variant="outlined" label={option} {...getTagProps({ index })} />
             ))
         }}
+        onChange={props.onChange}
         renderInput={(params) => (
             <TextField 
             {...params}

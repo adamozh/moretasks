@@ -1,10 +1,15 @@
 import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar } from "@mui/material"
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
+import { Tag } from "../entities/Tag";
 
 const drawerWidth = 240
 
-export const SideBar = () => {
+type SideBarProps = {
+    tags: Tag[]
+}
+
+export const SideBar = (props: SideBarProps) => {
     return (
         <Drawer
         variant="permanent"
@@ -25,12 +30,12 @@ export const SideBar = () => {
                 </List>
                 <Divider />
                 <List>
-                    {['CS2040S', 'CS2103T', 'Music', 'Cooking'].map((text, index) => (
-                        <ListItem button key={text}>
+                    {props.tags.map((tag, index) => (
+                        <ListItem button key={tag.name}>
                             <ListItemIcon>
                                 <LocalOfferOutlinedIcon />
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={tag.name} />
                         </ListItem>
                     ))}
                 </List>
