@@ -5,7 +5,7 @@ import { SideBar } from './components/SideBar';
 import { TaskView } from './components/TaskView';
 import { Tag } from './entities/Tag';
 import { Task } from './entities/Task';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { temporaryTags, temporaryTasks } from './data/TemporaryData';
 
 function App() {
@@ -14,9 +14,14 @@ function App() {
 
     const [tags, setTags] = useState(temporaryTags)
 
-    const submitNewTask = (newTask: Task) => {
+    const handleSubmitNewTask = (newTask: Task) => {
         setTasks([...tasks, newTask])
-        setTags([...tags, ...newTask.tags])
+        const tagStrings = tags.map(tag => tag.name)
+        newTask.tags.map(tag => {
+            if (!tagStrings.includes(tag.name)) {
+                setTags([...tags, tag])
+            }
+        })
     }
 
     return (
@@ -24,7 +29,7 @@ function App() {
             <Box sx={{ display: "flex" }}>
                 <NavBar />
                 <SideBar tags={tags}/>
-                <TaskView tasks={tasks} tags={tags}/>
+                <TaskView tasks={tasks} tags={tags} handleSubmitNewTask={handleSubmitNewTask} />
             </Box>
         </div>
     );

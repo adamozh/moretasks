@@ -1,6 +1,7 @@
 import { Box, Button, Grid, TextField } from "@mui/material"
 import React, { ChangeEvent, MouseEvent, SyntheticEvent, useRef, useState } from "react"
 import { Tag } from "../entities/Tag"
+import { Task } from "../entities/Task"
 import { DateInput } from "./DateInput"
 import { NameInput } from "./NameInput"
 import { TagInput } from "./TagInput"
@@ -8,6 +9,7 @@ import './TaskInputBox.scss'
 
 type TaskInputBoxProps = {
     options: Tag[]
+    handleSubmitNewTask: (newTask: Task) => void
 }
 
 export const TaskInputBox = (props: TaskInputBoxProps) => {
@@ -15,11 +17,26 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
     const [taskTags, setTaskTags] = useState<Array<string>>([])
     const [taskDate, setTaskDate] = useState<Date | null>(null)
 
-    const handleSubmit = () => {
+    const handleSubmitButtonClick = () => {
+        if (taskName === "") {
+            return
+        }
+        const newTask: Task = {
+            name: taskName,
+            done: false,
+            tags: taskTags.map(tag => {
+                return {
+                    name: tag
+                }
+            })
+        }
+        if (taskDate !== null) {
+            newTask["date"] = taskDate
+        }
+        props.handleSubmitNewTask(newTask)
         setTaskName("")
         setTaskTags([])
         setTaskDate(null)
-        
     }
 
     // const handleOnFocus = () => {
@@ -52,7 +69,7 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
                 </Grid>
                 <Grid item xs={12} md={2}>
                     <Button fullWidth sx={{ height: '100%' }} variant="contained" 
-                    onClick={handleSubmit}>Add</Button>
+                    onClick={handleSubmitButtonClick}>Add</Button>
                 </Grid>
             </Grid>
         </Box>

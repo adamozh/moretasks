@@ -12,7 +12,7 @@ export const DateInput = (props: DateInputProps) => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 value={props.date}
-                inputFormat='dd-MM-yyyy'
+                inputFormat='dd/MM/yyyy'
                 onChange={props.onChange}
                 label="Date"
                 renderInput={(params) => (

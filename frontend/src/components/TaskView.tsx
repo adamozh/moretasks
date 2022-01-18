@@ -7,13 +7,14 @@ import { TaskItem } from "./TaskItem"
 type TaskViewProps = {
     tasks: Task[]
     tags: Tag[]
+    handleSubmitNewTask: (newTask: Task) => void
 }
 
 export const TaskView = (props: TaskViewProps) => {
     return (
         <Container sx={{ py: 3 }} maxWidth="sm">
             <Toolbar />
-            <TaskInputBox options={props.tags} />
+            <TaskInputBox options={props.tags} handleSubmitNewTask={props.handleSubmitNewTask}/>
             <br />
             <br />
 
