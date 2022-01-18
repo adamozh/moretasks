@@ -1,4 +1,4 @@
-import { Container, Toolbar } from "@mui/material"
+import { Container, Stack, Toolbar } from "@mui/material"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
 import { TaskInputBox } from "./TaskInputBox"
@@ -15,10 +15,11 @@ export const TaskView = (props: TaskViewProps) => {
         <Container sx={{ py: 3 }} maxWidth="sm">
             <Toolbar />
             <TaskInputBox options={props.tags} handleSubmitNewTask={props.handleSubmitNewTask}/>
-            <br />
-            <br />
+            <br/><br/>
+            <Stack spacing={1}>
+                {props.tasks.map((task, index) => <TaskItem task={task} key={index} />)}
+            </Stack>
 
-            <TaskItem />
         </Container>
     )
 }
