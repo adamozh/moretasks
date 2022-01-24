@@ -13,10 +13,12 @@ type TaskInputBoxProps = {
 }
 
 export const TaskInputBox = (props: TaskInputBoxProps) => {
+    // States for controlled task input fields
     const [taskName, setTaskName] = useState<string>("")
     const [taskTags, setTaskTags] = useState<Array<string>>([])
     const [taskDate, setTaskDate] = useState<Date | null>(null)
 
+    // Handles what happens when the user submits a new task
     const handleSubmitButtonClick = () => {
         if (taskName === "") {
             return
@@ -32,7 +34,8 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
             })
         }
         if (taskDate !== null) {
-            newTask["date"] = taskDate
+            // Keep the date, remove the time
+            newTask["date"] = new Date(taskDate.toDateString())
         }
         props.handleSubmitNewTask(newTask)
         setTaskName("")
