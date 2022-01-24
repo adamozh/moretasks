@@ -3,6 +3,7 @@ import { Task } from "../entities/Task";
 
 export const temporaryTasks: Task[] = [
     {
+        id: 1,
         name: "Do Tutorial 3",
         done: false,
         tags: [
@@ -15,6 +16,7 @@ export const temporaryTasks: Task[] = [
         ]
     },
     {
+        id: 2,
         name: "Watch Lecture 3",
         done: false,
         tags: [
@@ -27,11 +29,13 @@ export const temporaryTasks: Task[] = [
         ]
     },
     {
+        id: 3,
         name: "Bring coco out for a walk",
         done: false,
         tags: []
     },
     {
+        id: 4,
         name: "Create layout for moreTasks",
         done: false,
         tags: [
