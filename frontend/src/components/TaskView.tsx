@@ -47,7 +47,7 @@ export const TaskView = (props: TaskViewProps) => {
     useEffect(() => {
         const tasks = props.currentFilterTag === null ? props.tasks : filterTasksByTag(props.currentFilterTag)
         setGroupedTasks(getTasksGroupedByDate(tasks))
-    }, [props.currentFilterTag])
+    }, [props.currentFilterTag, props.tasks])
 
     return (
         <Container sx={{ py: 3 }} maxWidth="sm">
