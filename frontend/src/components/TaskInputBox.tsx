@@ -40,16 +40,6 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
         setTaskDate(null)
     }
 
-    // const handleOnFocus = () => {
-    //     setIsFocusedInputBox(true)
-    // }
-
-    // const handleOnBlur = (event: any) => {
-    //     if (!event.currentTarget.contains(event.relatedTarget) && taskName === "" && !isFocusedDatePicker) {
-    //         setIsFocusedInputBox(false)
-    //     }
-    // }
-
     return (
         <Box sx={{ p: 2 , border: '0px solid #7c7c7c', borderRadius: 1, boxShadow: 3 }}>
             <Grid container borderRadius={2} rowSpacing={1} columnSpacing={1}>
