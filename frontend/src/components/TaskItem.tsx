@@ -14,18 +14,35 @@ export const TaskItem = (props: TaskItemProps) => {
 
     const [boxShadowValue, setBoxShadowValue] = useState(0)
     const [isEditing, setIsEditing] = useState(false)
+    const [currentTaskName, setCurrentTaskName] = useState(task.name)
+
+    const handleOnClickAway = () => {
+        if (currentTaskName === "") {
+            alert("Task name is empty!")
+        } else {
+            setIsEditing(false)
+        }
+
+    }
 
     const NameEditField = () => {
         return (
-            <ClickAwayListener onClickAway={() => setIsEditing(false)}>
-                <TextField autoFocus sx={{ width: '100%', paddingRight: 3 }} id="standard-basic" label="" variant="standard" value={task.name}/>
+            <ClickAwayListener onClickAway={handleOnClickAway}>
+                <TextField 
+                autoFocus
+                sx={{ width: '100%', paddingRight: 3 }}
+                id="standard-basic"
+                label=""
+                variant="standard"
+                value={currentTaskName}
+                onChange={(event) => setCurrentTaskName(event.target.value)}/>
             </ClickAwayListener>
         )
     }
 
     const Name = () => {
         return (
-            <Typography onClick={() => setIsEditing(true)} variant="body1">{task.name}</Typography>
+            <Typography onClick={() => setIsEditing(true)} variant="body1">{currentTaskName}</Typography>
         )
     }
 
