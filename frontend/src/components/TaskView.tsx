@@ -63,7 +63,7 @@ export const TaskView = (props: TaskViewProps) => {
                     <Box key={index}>
                         <Typography sx={{ marginTop: 2 }} variant="h5">{date}</Typography>
                         <Stack spacing={1}>
-                            {taskArray.map((task, index) => <TaskItem task={task} key={index} />)}
+                            {taskArray.map((task, index) => <TaskItem task={task} key={task.id} />)}
                         </Stack>
                     </Box>
                 )

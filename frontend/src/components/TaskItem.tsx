@@ -22,7 +22,6 @@ export const TaskItem = (props: TaskItemProps) => {
         } else {
             setIsEditing(false)
         }
-
     }
 
     const NameEditField = () => {
@@ -57,7 +56,7 @@ export const TaskItem = (props: TaskItemProps) => {
                 {isEditing ? <NameEditField /> : <Name />}
             </Stack>
             <Stack direction='row' spacing={0.5} >
-                {props.task.tags.map((tag: Tag, index: number) => {
+                {props.task.tags.map((tag, index) => {
                     return <Chip variant='outlined' size='small' label={tag.name} key={index}/>
                 })}
             </Stack>
