@@ -10,9 +10,20 @@ import { temporaryTags, temporaryTasks } from './data/TemporaryData';
 
 function App() {
 
+    /**
+     * Stores the state of all the tasks.
+     */
     const [tasks, setTasks] = useState(temporaryTasks)
 
+    /**
+     * Stores the state of all the tags.
+     */
     const [tags, setTags] = useState(temporaryTags)
+
+    /**
+     * Stores the state of current tag being filtered. Null means there is no filter.
+     */
+    const [filterTag, setFilterTag] = useState<Tag | null>(null);
 
     const handleSubmitNewTask = (newTask: Task) => {
         setTasks([...tasks, newTask])
@@ -28,8 +39,14 @@ function App() {
         <div className="App">
             <Box sx={{ display: "flex" }}>
                 <NavBar />
-                <SideBar tags={tags}/>
-                <TaskView tasks={tasks} tags={tags} handleSubmitNewTask={handleSubmitNewTask} />
+                <SideBar 
+                tags={tags}
+                onClickHandler={(newFilterTag) => setFilterTag(newFilterTag)}/>
+                <TaskView
+                tasks={tasks}
+                tags={tags}
+                currentFilterTag={filterTag}
+                handleSubmitNewTask={handleSubmitNewTask} />
             </Box>
         </div>
     );

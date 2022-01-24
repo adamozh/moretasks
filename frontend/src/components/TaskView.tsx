@@ -8,6 +8,7 @@ import { TaskItem } from "./TaskItem"
 type TaskViewProps = {
     tasks: Task[]
     tags: Tag[]
+    currentFilterTag: Tag | null
     handleSubmitNewTask: (newTask: Task) => void
 }
 
@@ -35,23 +36,31 @@ export const TaskView = (props: TaskViewProps) => {
         return groupedTasks
     }
 
+    const filterTasksByTag = (tag: Tag) => {
+        return props.tasks.filter(task => {
+            const tagStrings = task.tags.map(tag => tag.name)
+            return props.currentFilterTag !== null && tagStrings.includes(props.currentFilterTag.name)
+        })
+    }
+
     // Group tasks into dates
     useEffect(() => {
-        setGroupedTasks(getTasksGroupedByDate(props.tasks))
-    }, [])
+        const tasks = props.currentFilterTag === null ? props.tasks : filterTasksByTag(props.currentFilterTag)
+        setGroupedTasks(getTasksGroupedByDate(tasks))
+    }, [props.currentFilterTag])
 
     return (
         <Container sx={{ py: 3 }} maxWidth="sm">
             <Toolbar />
             <TaskInputBox options={props.tags} handleSubmitNewTask={props.handleSubmitNewTask}/>
             <br />
-            {Array.from(groupedTasks.keys()).map(date => {
+            {Array.from(groupedTasks.keys()).map((date, index) => {
                 let taskArray = groupedTasks.get(date)
                 if (!taskArray) {
                     taskArray = []
                 }
                 return (
-                    <Box>
+                    <Box key={index}>
                         <Typography sx={{ marginTop: 2 }} variant="h5">{date}</Typography>
                         <Stack spacing={1}>
                             {taskArray.map((task, index) => <TaskItem task={task} key={index} />)}

@@ -2,14 +2,17 @@ import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolb
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import { Tag } from "../entities/Tag";
+import { useState } from "react";
 
 const drawerWidth = 240
 
 type SideBarProps = {
     tags: Tag[]
+    onClickHandler: (newTag : Tag | null) => void
 }
 
 export const SideBar = (props: SideBarProps) => {
+
     return (
         <Drawer
         variant="permanent"
@@ -21,7 +24,7 @@ export const SideBar = (props: SideBarProps) => {
             <Toolbar />
             <Box sx={{ overflow: 'auto' }}>
                 <List>
-                    <ListItem button key={"Tasks"}>
+                    <ListItem button key={"Tasks"} onClick={() => props.onClickHandler(null)}>
                     <ListItemIcon>
                         <TaskOutlinedIcon />
                     </ListItemIcon>
@@ -31,7 +34,7 @@ export const SideBar = (props: SideBarProps) => {
                 <Divider />
                 <List>
                     {props.tags.map((tag, index) => (
-                        <ListItem button key={tag.name}>
+                        <ListItem button key={tag.name} onClick={() => props.onClickHandler(tag)}>
                             <ListItemIcon>
                                 <LocalOfferOutlinedIcon />
                             </ListItemIcon>
