@@ -11,36 +11,20 @@ export const temporaryTasks: Task[] = [
                 name: "CS2040S"
             },
             {
-                name: "schoolwork"
+                name: "NUS"
             }
         ]
     },
     {
         id: 1,
-        name: "Watch Lecture 3",
+        name: "Watch Lecture 4",
         done: false,
         tags: [
             {
-                name: "CS3230"
+                name: "CS2100",
             },
             {
-                name: "schoolwork"
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: "Bring coco out for a walk",
-        done: false,
-        tags: []
-    },
-    {
-        id: 3,
-        name: "Create layout for moreTasks",
-        done: false,
-        tags: [
-            {
-                name: "CVWO"
+                name: "NUS"
             }
         ]
     }
