@@ -1,5 +1,4 @@
 import { Box, Container, Stack, Toolbar, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
 import { TaskInputBox } from "./TaskInputBox"
@@ -15,6 +14,7 @@ type TaskViewProps = {
 }
 
 export const TaskView = (props: TaskViewProps) => {
+
     const filterTasksByTag = (tag: Tag) => {
         return props.tasks.filter(task => {
             const tagStrings = task.tags.map(tag => tag.name)
@@ -29,11 +29,13 @@ export const TaskView = (props: TaskViewProps) => {
     // }, [props.currentFilterTag, props.tasks])
 
     const getUndoneTasks = (tasks: Task[]) => {
-        return tasks.filter(task => task.done)
+        tasks = props.currentFilterTag === null ? tasks : filterTasksByTag(props.currentFilterTag)
+        return tasks.filter(task => !task.done)
     }
 
     const getDoneTasks = (tasks: Task[]) => {
-        return tasks.filter(task => !task.done)
+        tasks = props.currentFilterTag === null ? tasks : filterTasksByTag(props.currentFilterTag)
+        return tasks.filter(task => task.done)
     }
 
     return (

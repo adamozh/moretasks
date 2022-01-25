@@ -1,8 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from "@mui/material"
 import { useState } from "react"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
-import { DateInput } from "./DateInput"
 import { NameInput } from "./NameInput"
 import { TagInput } from "./TagInput"
 

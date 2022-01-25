@@ -1,15 +1,6 @@
 import { Tag } from "../entities/Tag";
 import { Task } from "../entities/Task";
 
-const dateNow = new Date()
-
-const date2020 = new Date()
-date2020.setFullYear(2020)
-
-const date2019 = new Date()
-date2019.setFullYear(2019)
-
-
 export const temporaryTasks: Task[] = [
     {
         id: 0,
