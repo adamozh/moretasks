@@ -15,29 +15,6 @@ type TaskViewProps = {
 }
 
 export const TaskView = (props: TaskViewProps) => {
-
-    const [groupedTasks, setGroupedTasks] = useState<Map<String, Task[]>>(new Map<String, Task[]>());
-
-    const getTasksGroupedByDate = (tasks: Task[]) : Map<String, Task[]> => {
-        // Sort tasks by date, and ensures all tasks with no date will go to the end
-        tasks.sort((task1, task2) => {
-            const date1 = task1.date === undefined ? Number.MAX_VALUE : new Date(task1.date).valueOf()
-            const date2 = task2.date === undefined ? Number.MAX_VALUE : new Date(task2.date).valueOf()
-            return date1 - date2;
-        })
-        const groupedTasks = new Map<String, Task[]>()
-        tasks.map(task => {
-            const date = task.date === undefined ? "No Date" : task.date.toDateString()
-            let taskArray = groupedTasks.get(date)
-            if (!taskArray) {
-                taskArray = []
-                groupedTasks.set(date, taskArray)
-            }
-            taskArray.push(task)
-        })
-        return groupedTasks
-    }
-
     const filterTasksByTag = (tag: Tag) => {
         return props.tasks.filter(task => {
             const tagStrings = task.tags.map(tag => tag.name)
@@ -46,35 +23,46 @@ export const TaskView = (props: TaskViewProps) => {
     }
 
     // Group tasks into dates
-    useEffect(() => {
-        const tasks = props.currentFilterTag === null ? props.tasks : filterTasksByTag(props.currentFilterTag)
-        setGroupedTasks(getTasksGroupedByDate(tasks))
-    }, [props.currentFilterTag, props.tasks])
+    // useEffect(() => {
+    //     const tasks = props.currentFilterTag === null ? props.tasks : filterTasksByTag(props.currentFilterTag)
+    //     setGroupedTasks(getTasksGroupedByDate(tasks))
+    // }, [props.currentFilterTag, props.tasks])
+
+    const getUndoneTasks = (tasks: Task[]) => {
+        return tasks.filter(task => task.done)
+    }
+
+    const getDoneTasks = (tasks: Task[]) => {
+        return tasks.filter(task => !task.done)
+    }
 
     return (
         <Container sx={{ py: 3 }} maxWidth="sm">
             <Toolbar />
             <TaskInputBox options={props.tags} handleSubmitNewTask={props.handleSubmitNewTask}/>
             <br />
-            {Array.from(groupedTasks.keys()).map((date, index) => {
-                let taskArray = groupedTasks.get(date)
-                if (!taskArray) {
-                    taskArray = []
-                }
-                return (
-                    <Box key={index}>
-                        <Typography sx={{ marginTop: 2 }} variant="h5">{date}</Typography>
-                        <Stack spacing={1}>
-                            {taskArray.map((task, index) => <TaskItem 
-                            task={task}
-                            tags={props.tags}
-                            key={task.id}
-                            handleUpdateTask={props.handleUpdateTask}
-                            handleDeleteTask={props.handleDeleteTask} />)}
-                        </Stack>
-                    </Box>
-                )
-            })}
+            <Box>
+                <Typography sx={{ marginTop: 2 }} variant="h5">To Do</Typography>
+                <Stack spacing={1}>
+                    {getUndoneTasks(props.tasks).map(task => <TaskItem 
+                    task={task}
+                    tags={props.tags}
+                    key={task.id}
+                    handleUpdateTask={props.handleUpdateTask}
+                    handleDeleteTask={props.handleDeleteTask} />)}
+                </Stack>
+            </Box>
+            <Box>
+                <Typography sx={{ marginTop: 2 }} variant="h5">Completed</Typography>
+                <Stack spacing={1}>
+                    {getDoneTasks(props.tasks).map(task => <TaskItem 
+                    task={task}
+                    tags={props.tags}
+                    key={task.id}
+                    handleUpdateTask={props.handleUpdateTask}
+                    handleDeleteTask={props.handleDeleteTask} />)}
+                </Stack>
+            </Box>
         </Container>
     )
 }

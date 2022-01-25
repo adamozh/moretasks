@@ -20,7 +20,6 @@ export const EditDialog = (props: EditDialogProps) => {
     // States for controlled task input fields
     const [taskName, setTaskName] = useState<string>(props.task.name)
     const [taskTags, setTaskTags] = useState<Array<string>>(props.task.tags.map(tag => tag.name))
-    const [taskDate, setTaskDate] = useState<Date | null>(props.task.date === undefined ? null : props.task.date)
     
     const handleEdit = () => {
         if (taskName === "") {
@@ -34,9 +33,6 @@ export const EditDialog = (props: EditDialogProps) => {
                     name: tag
                 }
             })
-        }
-        if (taskDate !== null) {
-            newTask.date = taskDate
         }
         props.handleUpdateTask(newTask)
         props.handleClose()
@@ -53,9 +49,6 @@ export const EditDialog = (props: EditDialogProps) => {
                     <TagInput
                         tags={taskTags} options={props.tags}
                         onChange={(event, value) => setTaskTags(value)}/>
-                    <DateInput
-                        date={taskDate}
-                        onChange={(newDate) => setTaskDate(newDate)}/>
                 </Stack>
             </DialogContent>
             <DialogActions>

@@ -16,7 +16,6 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
     // States for controlled task input fields
     const [taskName, setTaskName] = useState<string>("")
     const [taskTags, setTaskTags] = useState<Array<string>>([])
-    const [taskDate, setTaskDate] = useState<Date | null>(null)
 
     // Handles what happens when the user submits a new task
     const handleSubmitButtonClick = () => {
@@ -33,14 +32,9 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
                 }
             })
         }
-        if (taskDate !== null) {
-            // Keep the date, remove the time
-            newTask["date"] = new Date(taskDate.toDateString())
-        }
         props.handleSubmitNewTask(newTask)
         setTaskName("")
         setTaskTags([])
-        setTaskDate(null)
     }
 
     return (
@@ -51,16 +45,11 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
                     name={taskName}
                     onChange={(event) => setTaskName(event.target.value)}/>
                 </Grid>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={10}>
                     <TagInput
                     tags={taskTags} options={props.options}
                     onChange={(event, value) => setTaskTags(value)}/>
                 </Grid> 
-                <Grid item xs={12} md={5}>
-                    <DateInput
-                    date={taskDate}
-                    onChange={(newDate) => setTaskDate(newDate)}/>
-                </Grid>
                 <Grid item xs={12} md={2}>
                     <Button fullWidth sx={{ height: '100%' }} variant="contained" 
                     onClick={handleSubmitButtonClick}>Add</Button>

@@ -22,8 +22,7 @@ export const temporaryTasks: Task[] = [
             {
                 name: "schoolwork"
             }
-        ],
-        date: dateNow
+        ]
     },
     {
         id: 1,
@@ -36,15 +35,13 @@ export const temporaryTasks: Task[] = [
             {
                 name: "schoolwork"
             }
-        ],
-        date: date2020
+        ]
     },
     {
         id: 2,
         name: "Bring coco out for a walk",
         done: false,
-        tags: [],
-        date: date2019
+        tags: []
     },
     {
         id: 3,
