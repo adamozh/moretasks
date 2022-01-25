@@ -5,8 +5,8 @@ import { SideBar } from './components/SideBar';
 import { TaskView } from './components/TaskView';
 import { Tag } from './entities/Tag';
 import { Task } from './entities/Task';
-import { useState } from 'react'
-import { temporaryTags, temporaryTasks } from './data/TemporaryData';
+import { useEffect, useState } from 'react'
+import { getTagsFromTasks, temporaryTags, temporaryTasks } from './data/TemporaryData';
 
 function App() {
 
@@ -25,6 +25,10 @@ function App() {
      */
     const [filterTag, setFilterTag] = useState<Tag | null>(null)
 
+    useEffect(() => {
+        setTags(getTagsFromTasks(tasks))
+    }, [tasks])
+
     const handleSubmitNewTask = (newTask: Task) => {
         newTask.id = tasks.length
         setTasks([...tasks, newTask])
@@ -40,16 +44,29 @@ function App() {
         const taskToReplace = tasks.find(task => task.id === newTask.id)
         if (taskToReplace === undefined) {
             alert("There was an error updating the task")
-        } else {
-            const indexOfTaskToReplace = tasks.indexOf(taskToReplace)
-            const updatedTasks = tasks
-            updatedTasks[indexOfTaskToReplace] = newTask
-            setTasks([...updatedTasks])
+            return
         }
+        const indexOfTaskToReplace = tasks.indexOf(taskToReplace)
+        const updatedTasks = tasks
+        updatedTasks[indexOfTaskToReplace] = newTask
+        setTasks([...updatedTasks])
     }
 
     const handleDeleteTask = (id: number) => {
         setTasks(tasks.filter(task => task.id !== id))
+
+    }
+
+    const handleToggleDone = (id: number) => {
+        const targetTask = tasks.find(task => task.id === id)
+        if (targetTask === undefined) {
+            alert("There was an error marking the task done")
+            return
+        }
+        const index = tasks.indexOf(targetTask)
+        const newTasks = [...tasks]
+        newTasks[index].done = !targetTask.done
+        setTasks(newTasks)
     }
 
     return (
@@ -65,7 +82,8 @@ function App() {
                 currentFilterTag={filterTag}
                 handleSubmitNewTask={handleSubmitNewTask}
                 handleUpdateTask={handleUpdateTask}
-                handleDeleteTask={handleDeleteTask} />
+                handleDeleteTask={handleDeleteTask}
+                handleToggleDone={handleToggleDone} />
             </Box>
         </div>
     )

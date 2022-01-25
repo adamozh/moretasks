@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
 import { NameInput } from "./NameInput"
@@ -19,7 +19,7 @@ export const EditDialog = (props: EditDialogProps) => {
     // States for controlled task input fields
     const [taskName, setTaskName] = useState<string>(props.task.name)
     const [taskTags, setTaskTags] = useState<Array<string>>(props.task.tags.map(tag => tag.name))
-    
+
     const handleEdit = () => {
         if (taskName === "") {
             return;

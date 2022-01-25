@@ -11,6 +11,7 @@ type TaskViewProps = {
     handleSubmitNewTask: (newTask: Task) => void
     handleUpdateTask: (newTask: Task) => void
     handleDeleteTask: (id: number) => void
+    handleToggleDone: (id: number) => void
 }
 
 export const TaskView = (props: TaskViewProps) => {
@@ -51,7 +52,8 @@ export const TaskView = (props: TaskViewProps) => {
                     tags={props.tags}
                     key={task.id}
                     handleUpdateTask={props.handleUpdateTask}
-                    handleDeleteTask={props.handleDeleteTask} />)}
+                    handleDeleteTask={props.handleDeleteTask}
+                    handleToggleDone={props.handleToggleDone} />)}
                 </Stack>
             </Box>
             <Box>
@@ -62,7 +64,8 @@ export const TaskView = (props: TaskViewProps) => {
                     tags={props.tags}
                     key={task.id}
                     handleUpdateTask={props.handleUpdateTask}
-                    handleDeleteTask={props.handleDeleteTask} />)}
+                    handleDeleteTask={props.handleDeleteTask}
+                    handleToggleDone={props.handleToggleDone} />)}
                 </Stack>
             </Box>
         </Container>

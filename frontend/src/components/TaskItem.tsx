@@ -10,56 +10,26 @@ type TaskItemProps = {
     tags: Tag[]
     handleUpdateTask: (newTask: Task) => void
     handleDeleteTask: (id: number) => void
+    handleToggleDone: (id: number) => void
 }
 
 export const TaskItem = (props: TaskItemProps) => {
     
     const [boxShadowValue, setBoxShadowValue] = useState(0)
-    const [isEditing, setIsEditing] = useState(false)
-    const [currentTask, setCurrentTask] = useState(props.task)
 
-    const handleOnClickAway = () => {
-        if (currentTask.name === "") {
-            alert("Task name is empty!")
-        } else {
-            setIsEditing(false)
-        }
-        console.log(currentTask.id)
-        props.handleUpdateTask(currentTask)
+    const handleCheck = (event: any, check: boolean) => {
+        props.handleToggleDone(props.task.id)
     }
-    
-    const NameEditField = () => {
-        return (
-            <ClickAwayListener onClickAway={handleOnClickAway}>
-                <TextField 
-                autoFocus
-                sx={{ width: '100%', paddingRight: 3 }}
-                id="standard-basic"
-                label=""
-                variant="standard"
-                value={currentTask.name}
-                onChange={(event) => setCurrentTask({...currentTask, name: event.target.value})}/>
-            </ClickAwayListener>
-        )
-    }
-
-    const Name = () => {
-        return (
-            <Typography onClick={() => setIsEditing(true)} variant="body1">{currentTask.name}</Typography>
-        )
-    }
-
-
 
     return (
         <Box 
-        sx={{ borderRadius: 1, boxShadow: boxShadowValue }}
+        sx={{ borderRadius: 1, boxShadow: boxShadowValue, opacity: props.task.done ? 0.6 : 1 }}
         onMouseEnter={() => setBoxShadowValue(3)}
         onMouseLeave={() => setBoxShadowValue(0)}
         className="task-item">
             <Stack direction='row' alignItems='center'>
-                <Checkbox checked={currentTask.done} />
-                {isEditing ? <NameEditField /> : <Name />}
+                <Checkbox checked={props.task.done} onChange={handleCheck} />
+                <Typography variant="body1">{props.task.name}</Typography>
                 <MoreButton 
                 task={props.task}
                 tags={props.tags}
@@ -67,7 +37,7 @@ export const TaskItem = (props: TaskItemProps) => {
                 handleUpdateTask={props.handleUpdateTask}/>
             </Stack>
             <Stack direction='row' spacing={0.5} >
-                {currentTask.tags.map((tag, index) => {
+                {props.task.tags.map((tag, index) => {
                     return <Chip variant='outlined' size='small' label={tag.name} key={index}/>
                 })}
             </Stack>

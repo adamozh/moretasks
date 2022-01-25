@@ -46,7 +46,7 @@ export const temporaryTasks: Task[] = [
     }
 ]
 
-const getTagsFromTasks = (temporaryTasks: Task[]) : Tag[] => {
+export const getTagsFromTasks = (temporaryTasks: Task[]) : Tag[] => {
     const allStringTags: string[] = []
     temporaryTasks.map((task: Task) => {
         task.tags.map((tag: Tag) => {
