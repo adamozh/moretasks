@@ -26,6 +26,7 @@ function App() {
     const [filterTag, setFilterTag] = useState<Tag | null>(null);
 
     const handleSubmitNewTask = (newTask: Task) => {
+        newTask.id = tasks.length
         setTasks([...tasks, newTask])
         const tagStrings = tags.map(tag => tag.name)
         newTask.tags.map(tag => {
@@ -33,6 +34,21 @@ function App() {
                 setTags([...tags, tag])
             }
         })
+    }
+
+    const handleUpdateTask = (newTask: Task) => {
+        const taskToReplace = tasks.find(task => task.id === newTask.id)
+        if (taskToReplace === undefined) {
+            alert("There was an error updating the task")
+        } else {
+            const indexOfTaskToReplace = tasks.indexOf(taskToReplace)
+            tasks[indexOfTaskToReplace] = newTask
+            setTasks(tasks)
+        }
+    }
+
+    const handleDeleteTask = (id: number) => {
+        setTasks(tasks.filter(task => task.id !== id))
     }
 
     return (
@@ -46,7 +62,8 @@ function App() {
                 tasks={tasks}
                 tags={tags}
                 currentFilterTag={filterTag}
-                handleSubmitNewTask={handleSubmitNewTask} />
+                handleSubmitNewTask={handleSubmitNewTask}
+                handleUpdateTask={handleUpdateTask} />
             </Box>
         </div>
     );

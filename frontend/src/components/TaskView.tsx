@@ -10,6 +10,7 @@ type TaskViewProps = {
     tags: Tag[]
     currentFilterTag: Tag | null
     handleSubmitNewTask: (newTask: Task) => void
+    handleUpdateTask: (newTask: Task) => void
 }
 
 export const TaskView = (props: TaskViewProps) => {
@@ -63,7 +64,7 @@ export const TaskView = (props: TaskViewProps) => {
                     <Box key={index}>
                         <Typography sx={{ marginTop: 2 }} variant="h5">{date}</Typography>
                         <Stack spacing={1}>
-                            {taskArray.map((task, index) => <TaskItem task={task} key={task.id} />)}
+                            {taskArray.map((task, index) => <TaskItem handleUpdateTask={props.handleUpdateTask} task={task} key={task.id} />)}
                         </Stack>
                     </Box>
                 )

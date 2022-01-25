@@ -12,7 +12,7 @@ date2019.setFullYear(2019)
 
 export const temporaryTasks: Task[] = [
     {
-        id: 1,
+        id: 0,
         name: "Do Tutorial 3",
         done: false,
         tags: [
@@ -26,7 +26,7 @@ export const temporaryTasks: Task[] = [
         date: dateNow
     },
     {
-        id: 2,
+        id: 1,
         name: "Watch Lecture 3",
         done: false,
         tags: [
@@ -40,14 +40,14 @@ export const temporaryTasks: Task[] = [
         date: date2020
     },
     {
-        id: 3,
+        id: 2,
         name: "Bring coco out for a walk",
         done: false,
         tags: [],
         date: date2019
     },
     {
-        id: 4,
+        id: 3,
         name: "Create layout for moreTasks",
         done: false,
         tags: [

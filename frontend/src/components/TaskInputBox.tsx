@@ -24,7 +24,7 @@ export const TaskInputBox = (props: TaskInputBoxProps) => {
             return
         }
         const newTask: Task = {
-            id: 5,
+            id: 0,
             name: taskName,
             done: false,
             tags: taskTags.map(tag => {

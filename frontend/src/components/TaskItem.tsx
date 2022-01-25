@@ -1,27 +1,30 @@
-import { Box, Checkbox, Chip, ClickAwayListener, Stack, TextField, Typography } from "@mui/material"
+import { Box, Checkbox, Chip, ClickAwayListener, IconButton, Stack, TextField, Typography } from "@mui/material"
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useState, useEffect } from "react"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
 import './TaskItem.scss'
+import { MoreButton } from "./MoreButton";
 
 type TaskItemProps = {
     task: Task
+    handleUpdateTask: (newTask: Task) => void
 }
 
 export const TaskItem = (props: TaskItemProps) => {
 
-    const task = props.task
-
     const [boxShadowValue, setBoxShadowValue] = useState(0)
     const [isEditing, setIsEditing] = useState(false)
-    const [currentTaskName, setCurrentTaskName] = useState(task.name)
+    const [currentTask, setCurrentTask] = useState(props.task)
 
     const handleOnClickAway = () => {
-        if (currentTaskName === "") {
+        if (currentTask.name === "") {
             alert("Task name is empty!")
         } else {
             setIsEditing(false)
         }
+        console.log(currentTask.id)
+        props.handleUpdateTask(currentTask)
     }
 
     const NameEditField = () => {
@@ -33,15 +36,15 @@ export const TaskItem = (props: TaskItemProps) => {
                 id="standard-basic"
                 label=""
                 variant="standard"
-                value={currentTaskName}
-                onChange={(event) => setCurrentTaskName(event.target.value)}/>
+                value={currentTask.name}
+                onChange={(event) => setCurrentTask({...currentTask, name: event.target.value})}/>
             </ClickAwayListener>
         )
     }
 
     const Name = () => {
         return (
-            <Typography onClick={() => setIsEditing(true)} variant="body1">{currentTaskName}</Typography>
+            <Typography onClick={() => setIsEditing(true)} variant="body1">{currentTask.name}</Typography>
         )
     }
 
@@ -52,11 +55,12 @@ export const TaskItem = (props: TaskItemProps) => {
         onMouseLeave={() => setBoxShadowValue(0)}
         className="task-item">
             <Stack direction='row' alignItems='center'>
-                <Checkbox checked={task.done} />
+                <Checkbox checked={currentTask.done} />
                 {isEditing ? <NameEditField /> : <Name />}
+                <MoreButton />
             </Stack>
             <Stack direction='row' spacing={0.5} >
-                {props.task.tags.map((tag, index) => {
+                {currentTask.tags.map((tag, index) => {
                     return <Chip variant='outlined' size='small' label={tag.name} key={index}/>
                 })}
             </Stack>
