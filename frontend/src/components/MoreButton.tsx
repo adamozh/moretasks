@@ -1,9 +1,19 @@
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Task } from "../entities/Task";
+import { EditDialog } from "./EditDialog";
 
-export const MoreButton = () => {
+type MoreButtonProps = {
+    task: Task
+    handleDeleteTask: (id: number) => void
+    handleUpdateTask: (task: Task) => void
+}
+
+export const MoreButton = (props: MoreButtonProps) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const [editDialogIsOpen, setEditDialogIsOpen] = useState<boolean>(false)
+
     const open = Boolean(anchorEl)
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,8 +42,13 @@ export const MoreButton = () => {
             MenuListProps={{
             'aria-labelledby': 'basic-button',
             }} >
-                <MenuItem onClick={handleClose}>Edit</MenuItem>
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={() => setEditDialogIsOpen(true)}>Edit</MenuItem>
+                <EditDialog 
+                isOpen={editDialogIsOpen}
+                handleOpen={() => setEditDialogIsOpen(true)}
+                handleClose={() => setEditDialogIsOpen(false)}
+                handleUpdateTask={props.handleUpdateTask} />
+                <MenuItem onClick={() => props.handleDeleteTask(props.task.id)}>Delete</MenuItem>
             </Menu>
         </Box>
     )

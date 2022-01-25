@@ -1,7 +1,5 @@
-import { Box, Checkbox, Chip, ClickAwayListener, IconButton, Stack, TextField, Typography } from "@mui/material"
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { useState, useEffect } from "react"
-import { Tag } from "../entities/Tag"
+import { Box, Checkbox, Chip, ClickAwayListener, Stack, TextField, Typography } from "@mui/material"
+import { useState } from "react"
 import { Task } from "../entities/Task"
 import './TaskItem.scss'
 import { MoreButton } from "./MoreButton";
@@ -9,10 +7,11 @@ import { MoreButton } from "./MoreButton";
 type TaskItemProps = {
     task: Task
     handleUpdateTask: (newTask: Task) => void
+    handleDeleteTask: (id: number) => void
 }
 
 export const TaskItem = (props: TaskItemProps) => {
-
+    
     const [boxShadowValue, setBoxShadowValue] = useState(0)
     const [isEditing, setIsEditing] = useState(false)
     const [currentTask, setCurrentTask] = useState(props.task)
@@ -48,6 +47,8 @@ export const TaskItem = (props: TaskItemProps) => {
         )
     }
 
+
+
     return (
         <Box 
         sx={{ borderRadius: 1, boxShadow: boxShadowValue }}
@@ -57,7 +58,10 @@ export const TaskItem = (props: TaskItemProps) => {
             <Stack direction='row' alignItems='center'>
                 <Checkbox checked={currentTask.done} />
                 {isEditing ? <NameEditField /> : <Name />}
-                <MoreButton />
+                <MoreButton 
+                task={props.task}
+                handleDeleteTask={props.handleDeleteTask}
+                handleUpdateTask={props.handleUpdateTask}/>
             </Stack>
             <Stack direction='row' spacing={0.5} >
                 {currentTask.tags.map((tag, index) => {

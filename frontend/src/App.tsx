@@ -5,7 +5,7 @@ import { SideBar } from './components/SideBar';
 import { TaskView } from './components/TaskView';
 import { Tag } from './entities/Tag';
 import { Task } from './entities/Task';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { temporaryTags, temporaryTasks } from './data/TemporaryData';
 
 function App() {
@@ -19,11 +19,11 @@ function App() {
      * Stores the state of all the tags.
      */
     const [tags, setTags] = useState(temporaryTags)
-
+    
     /**
      * Stores the state of current tag being filtered. Null means there is no filter.
      */
-    const [filterTag, setFilterTag] = useState<Tag | null>(null);
+    const [filterTag, setFilterTag] = useState<Tag | null>(null)
 
     const handleSubmitNewTask = (newTask: Task) => {
         newTask.id = tasks.length
@@ -63,10 +63,11 @@ function App() {
                 tags={tags}
                 currentFilterTag={filterTag}
                 handleSubmitNewTask={handleSubmitNewTask}
-                handleUpdateTask={handleUpdateTask} />
+                handleUpdateTask={handleUpdateTask}
+                handleDeleteTask={handleDeleteTask} />
             </Box>
         </div>
-    );
+    )
 }
 
 export default App;
