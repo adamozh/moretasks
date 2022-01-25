@@ -42,8 +42,9 @@ function App() {
             alert("There was an error updating the task")
         } else {
             const indexOfTaskToReplace = tasks.indexOf(taskToReplace)
-            tasks[indexOfTaskToReplace] = newTask
-            setTasks(tasks)
+            const updatedTasks = tasks
+            updatedTasks[indexOfTaskToReplace] = newTask
+            setTasks([...updatedTasks])
         }
     }
 

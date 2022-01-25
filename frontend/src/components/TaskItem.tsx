@@ -1,11 +1,13 @@
 import { Box, Checkbox, Chip, ClickAwayListener, Stack, TextField, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Task } from "../entities/Task"
 import './TaskItem.scss'
 import { MoreButton } from "./MoreButton";
+import { Tag } from "../entities/Tag";
 
 type TaskItemProps = {
     task: Task
+    tags: Tag[]
     handleUpdateTask: (newTask: Task) => void
     handleDeleteTask: (id: number) => void
 }
@@ -25,7 +27,7 @@ export const TaskItem = (props: TaskItemProps) => {
         console.log(currentTask.id)
         props.handleUpdateTask(currentTask)
     }
-
+    
     const NameEditField = () => {
         return (
             <ClickAwayListener onClickAway={handleOnClickAway}>
@@ -60,6 +62,7 @@ export const TaskItem = (props: TaskItemProps) => {
                 {isEditing ? <NameEditField /> : <Name />}
                 <MoreButton 
                 task={props.task}
+                tags={props.tags}
                 handleDeleteTask={props.handleDeleteTask}
                 handleUpdateTask={props.handleUpdateTask}/>
             </Stack>

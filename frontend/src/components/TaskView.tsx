@@ -67,6 +67,7 @@ export const TaskView = (props: TaskViewProps) => {
                         <Stack spacing={1}>
                             {taskArray.map((task, index) => <TaskItem 
                             task={task}
+                            tags={props.tags}
                             key={task.id}
                             handleUpdateTask={props.handleUpdateTask}
                             handleDeleteTask={props.handleDeleteTask} />)}

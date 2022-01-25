@@ -3,9 +3,11 @@ import { useState } from "react";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Task } from "../entities/Task";
 import { EditDialog } from "./EditDialog";
+import { Tag } from "../entities/Tag";
 
 type MoreButtonProps = {
     task: Task
+    tags: Tag[]
     handleDeleteTask: (id: number) => void
     handleUpdateTask: (task: Task) => void
 }
@@ -44,6 +46,8 @@ export const MoreButton = (props: MoreButtonProps) => {
             }} >
                 <MenuItem onClick={() => setEditDialogIsOpen(true)}>Edit</MenuItem>
                 <EditDialog 
+                task={props.task}
+                tags={props.tags}
                 isOpen={editDialogIsOpen}
                 handleOpen={() => setEditDialogIsOpen(true)}
                 handleClose={() => setEditDialogIsOpen(false)}
