@@ -6,7 +6,7 @@ export const Clock = () => {
     const [time, setTime] = useState(new Date().toLocaleTimeString())
 
     useEffect(() => {
-        var intervalId = setInterval(() => {
+        setInterval(() => {
             setDate(new Date().toLocaleDateString())
             setTime(new Date().toLocaleTimeString())
         }, 1000)
