@@ -2,7 +2,6 @@ import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolb
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import { Tag } from "../entities/Tag";
-import { useState } from "react";
 
 const drawerWidth = 240
 
