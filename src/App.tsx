@@ -33,7 +33,7 @@ function App() {
         newTask.id = tasks.length
         setTasks([...tasks, newTask])
         const tagStrings = tags.map(tag => tag.name)
-        newTask.tags.map(tag => {
+        newTask.tags.forEach(tag => {
             if (!tagStrings.includes(tag.name)) {
                 setTags([...tags, tag])
             }
