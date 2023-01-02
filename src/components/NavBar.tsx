@@ -1,4 +1,4 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material"
+import { AppBar, Toolbar, Typography } from "@mui/material"
 import { Clock } from "./Clock";
 
 export const NavBar = () => {
