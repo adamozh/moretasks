@@ -32,8 +32,8 @@ export const temporaryTasks: Task[] = [
 
 export const getTagsFromTasks = (temporaryTasks: Task[]) : Tag[] => {
     const allStringTags: string[] = []
-    temporaryTasks.map((task: Task) => {
-        task.tags.map((tag: Tag) => {
+    temporaryTasks.forEach((task: Task) => {
+        task.tags.forEach((tag: Tag) => {
             allStringTags.push(tag.name)
         })
     })
