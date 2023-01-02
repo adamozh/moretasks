@@ -1,5 +1,4 @@
-import { Autocomplete, Chip, TextField, Toolbar } from "@mui/material"
-import { ChangeEventHandler, FocusEventHandler } from "react"
+import { Autocomplete, Chip, TextField } from "@mui/material"
 import { Tag } from "../entities/Tag"
 
 type TagInputProps = {
