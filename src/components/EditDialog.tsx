@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Tag } from "../entities/Tag"
 import { Task } from "../entities/Task"
 import { NameInput } from "./NameInput"
