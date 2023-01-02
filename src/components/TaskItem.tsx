@@ -1,5 +1,5 @@
-import { Box, Checkbox, Chip, ClickAwayListener, Stack, TextField, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { Box, Checkbox, Chip, Stack, Typography } from "@mui/material"
+import { useState } from "react"
 import { Task } from "../entities/Task"
 import './TaskItem.scss'
 import { MoreButton } from "./MoreButton";
