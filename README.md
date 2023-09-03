@@ -2,7 +2,7 @@
 
 A simple todo list built with React
 
-App: https://moretasks-app.herokuapp.com
+App: https://moretasks.netlify.app/
 
 Name: Adam Oh Zhi Hong
 
